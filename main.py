@@ -7,7 +7,7 @@ from prettytable import PrettyTable
 temp_path = os.getenv("LOCALAPPDATA") + "/Temp/.net/BotsAreStupid"
 leaderboard_url = "http://bas.leleg.de/game/Preview/Scores/List.php"
 run_data_url = "http://bas.leleg.de/game/Preview/Scores/Get.php?id="
-sim_modes = ["default, nojump", "lowgrav", "hook360", "elastichook", "boostedboosters", "legacy"]
+sim_modes = ["default", "nojump", "lowgrav", "hook360", "elastichook", "boostedboosters", "legacy"]
 
 leaderboard_entry_limit = 10
 keep_comments = False
@@ -160,7 +160,7 @@ def parse_leaderboard_data(data):
 
 
 def get_leaderboard(level):
-    query = {'search': sort_by, 'levelid': level['id']}
+    query = {'search': sort_by, 'levelid': level['id'], 'simulationmode': sim_mode}
     data = request_data(leaderboard_url, query)
     return parse_leaderboard_data(data)
 
