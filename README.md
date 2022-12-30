@@ -7,7 +7,7 @@ Download the code of ghosts in the game 'Bots are stupid'.
 ### How it works
 This script checks your `%localappdata%/Temp/.net/BotsAreStupid` for the pre-installed levels. You can then select one of the levels which shows you a list of available ghosts for that level. Select one of them and you will see the code the player used to beat the level. 
 
-**!!!Caution!!!**: The developer of the game could ban you from the leaderboards if you copy code from other players. Only use this program to collect inspiration from the fast and/or short codes user have submitted.
+**!!!Caution!!!**: The developer of the game could ban you from the leaderboards if you copy code from other players. Only use this program to collect inspiration from the fast and/or short codes users have submitted.
 
 ### Requirements
 You need a [python3 installation](https://www.python.org/downloads/). You can install the used packages like this:
