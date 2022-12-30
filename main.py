@@ -76,46 +76,44 @@ def find_levels():
 
 
 def settings_config():
-    print("You can configure some (4) settings now. Type skip at any point to skip the rest of the configuration.")
-    answer = input("Do you want to order the leaderboards by min lines? (default: min time) [y/n]: ")
-    if answer.lower() == "skip":
+    prompts = [
+        "Do you want to order the leaderboards by min lines? (default: min time) [y/n]: ",
+        f"Select one of the following modes (case-sensitive, enter anything to select default): ({', '.join(sim_modes)}): ",
+        "How many entries do you want to see on the leaderboard? (default: 10) [1-50]: ",
+        "Do you want to see comments in the code that were written by the player? (default: no) [y/n]: ",
+        "Do you want to keep blank lines in the code that were used by the player? (default: no) [y/n]: "
+    ]
+    answers = []
+    print("You can configure some settings now. Type skip at any point to skip the rest of the configuration.")
+    for prompt in prompts:
+        answer = input(prompt)
+        if answer.lower() == "skip":
+            break
+
+        answers.append(answer)
+
+    if len(answers) == 0:
         return
 
-    if answer.lower()[0] == 'y':
+    if len(answers) >= 1 and answers[0] and answers[0].lower()[0] == 'y':
         global sort_by
         sort_by = "minLines"
 
-    answer = input("How many entries do you want to see on the leaderboard? (default: 10) [1-50]: ")
-    if answer.lower() == "skip":
-        return
+    if len(answers) >= 2 and answers[1] in sim_modes:
+        global sim_mode
+        sim_mode = answers[1]
 
-    if answer.isdigit():
-        entries = int(answer)
+    if len(answers) >= 3 and answers[2] and answers[2].isdigit():
+        entries = int(answers[2])
         if 0 < entries <= 50:
             global leaderboard_entry_limit
             leaderboard_entry_limit = entries
 
-    answer = input(f"Select one of the following modes (case-sensitive, enter anything to select default): ({', '.join(sim_modes)}): ")
-    if answer.lower() == "skip":
-        return
-
-    if answer in sim_modes:
-        global sim_mode
-        sim_mode = answer
-
-    answer = input("Do you want to see comments in the code that were written by the player? (default: no) [y/n]: ")
-    if answer.lower() == "skip":
-        return
-
-    if answer.lower()[0] == 'y':
+    if len(answers) >= 4 and answers[3] and answers[3].lower()[0] == 'y':
         global keep_comments
         keep_comments = True
 
-    answer = input("Do you want to keep blank lines in the code that were used by the player? (default: no) [y/n]: ")
-    if answer.lower() == "skip":
-        return
-
-    if answer.lower()[0] == 'y':
+    if len(answers) >= 5 and answers[4] and answers[4].lower()[0] == 'y':
         global keep_blank_lines
         keep_blank_lines = True
 
