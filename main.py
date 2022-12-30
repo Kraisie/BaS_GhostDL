@@ -7,11 +7,13 @@ from prettytable import PrettyTable
 temp_path = os.getenv("LOCALAPPDATA") + "/Temp/.net/BotsAreStupid"
 leaderboard_url = "http://bas.leleg.de/game/Preview/Scores/List.php"
 run_data_url = "http://bas.leleg.de/game/Preview/Scores/Get.php?id="
+sim_modes = ["default, nojump", "lowgrav", "hook360", "elastichook", "boostedboosters", "legacy"]
 
 leaderboard_entry_limit = 10
 keep_comments = False
 keep_blank_lines = False
 sort_by = "minSpeed"
+sim_mode = "default"
 
 
 def find_levels_dir():
@@ -92,6 +94,14 @@ def settings_config():
         if 0 < entries <= 50:
             global leaderboard_entry_limit
             leaderboard_entry_limit = entries
+
+    answer = input(f"Select one of the following modes (case-sensitive, enter anything to select default): ({', '.join(sim_modes)}): ")
+    if answer.lower() == "skip":
+        return
+
+    if answer in sim_modes:
+        global sim_mode
+        sim_mode = answer
 
     answer = input("Do you want to see comments in the code that were written by the player? (default: no) [y/n]: ")
     if answer.lower() == "skip":
@@ -254,5 +264,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print("\n\n\n")
     main()
